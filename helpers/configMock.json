@@ -1,0 +1,103 @@
+{
+  "data": {
+    "status": 200,
+    "is_login": false,
+    "message": "success",
+    "data": {
+      "sales": {
+        "active": true,
+        "percent": 20
+      },
+      "intro": [
+        {
+          "title": "Головний заголовок",
+          "text": "Текст головного заголовка",
+          "image": "https://images.hdqwalls.com/wallpapers/moon-stars-reflection-70.jpg"
+        },
+        {
+          "title": "Головний заголовок",
+          "image": "https://assets.entrepreneur.com/content/3x2/2000/20200429211042-GettyImages-1164615296.jpeg?format=pjeg&auto=webp&crop=16:9"
+        },
+        {
+          "image": "https://static.toiimg.com/photo/msid-53891743,width-96,height-65.cms"
+        }
+      ],
+      "short_news": [
+        { "title": "Контент короткої новини разом із текстом", "link": "/" },
+        { "title": "Контент короткої новини разом із текстом", "link": "/" },
+        { "title": "Контент короткої новини разом із текстом", "link": "/" },
+        { "title": "Контент короткої новини разом із текстом", "link": "/" }
+      ],
+      "home_products": {
+        "new": [
+          {
+            "id": 1,
+            "title": "Джинси Medicine",
+            "price": 1000,
+            "category": "Одяг",
+            "brend": "Medicine",
+            "image": "https://content1.rozetka.com.ua/goods/images/big/328997055.jpg"
+          },
+          {
+            "id": 2,
+            "title": "Джинси Mango Newmom",
+            "price": 750,
+            "category": "Одяг",
+            "brend": "Mango Newmom",
+            "image": "https://content.rozetka.com.ua/goods/images/big/352041296.jpg"
+          },
+          {
+            "id": 3,
+            "title": "Плаття Dressa",
+            "price": 1100,
+            "category": "Одяг",
+            "brend": "Dressa",
+            "image": "https://content.rozetka.com.ua/goods/images/big/339777475.jpg"
+          },
+          {
+            "id": 4,
+            "title": "Чоловічі кросівки New Balance",
+            "price": 1300,
+            "category": "Взуття",
+            "brend": "New Balance",
+            "image": "https://content.rozetka.com.ua/goods/images/big/311515328.jpg"
+          }
+        ],
+        "top": [
+          {
+            "id": 5,
+            "title": "Плаття Dressa",
+            "price": 1100,
+            "category": "Одяг",
+            "brend": "Dressa",
+            "image": "https://content.rozetka.com.ua/goods/images/big/339777475.jpg"
+          },
+          {
+            "id": 6,
+            "title": "Чоловічі кросівки New Balance",
+            "price": 1300,
+            "category": "Взуття",
+            "brend": "New Balance",
+            "image": "https://content.rozetka.com.ua/goods/images/big/311515328.jpg"
+          },
+          {
+            "id": 7,
+            "title": "Джинси Medicine",
+            "price": 1000,
+            "category": "Одяг",
+            "brend": "Medicine",
+            "image": "https://content1.rozetka.com.ua/goods/images/big/328997055.jpg"
+          },
+          {
+            "id": 8,
+            "title": "Джинси Mango Newmom",
+            "price": 750,
+            "category": "Одяг",
+            "brend": "Mango Newmom",
+            "image": "https://content.rozetka.com.ua/goods/images/big/352041296.jpg"
+          }
+        ]
+      }
+    }
+  }
+}
