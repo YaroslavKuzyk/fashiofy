@@ -5,5 +5,5 @@ export default defineNuxtConfig({
   pinia: {
     autoImports: ["defineStore", ["defineStore", "definePiniaStore"]],
   },
-  buildDir: ".nuxt",
+  buildDir: "dist",
 });
