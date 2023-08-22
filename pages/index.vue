@@ -4,7 +4,7 @@
       <Carousel :sliderItem="configStore.getConfig.intro" />
     </div>
     <div class="home-short-news">
-      <ShortNews
+      <HomeNews
         v-for="(item, index) in configStore.getConfig.short_news"
         :key="index"
         :item="item"
@@ -29,19 +29,57 @@
       </div>
       <div class="home-tabs__content">
         <div v-if="activeTab === 1" class="home-tabs__item">
-          <ShortProduct
-            v-for="(item, index) in configStore.getConfig.home_products.new"
+          <HomeProduct
+            v-for="(item, index) in getNewHomeProducts"
             :key="index"
             :item="item"
           />
         </div>
         <div v-if="activeTab === 2" class="home-tabs__item">
-          <ShortProduct
-            v-for="(item, index) in configStore.getConfig.home_products.top"
+          <HomeProduct
+            v-for="(item, index) in getTopHomeProducts"
             :key="index"
             :item="item"
           />
         </div>
+      </div>
+    </div>
+    <div class="home-section">
+      <div class="home-section__header">
+        <h2 class="home-title">Топ-Категорії</h2>
+        <nuxt-link class="home-section__link" to="/">Показати більше</nuxt-link>
+      </div>
+      <div class="home-section__content">
+        <HomeCategory
+          v-for="item in getTopCategories"
+          :key="item.id"
+          :item="item"
+        />
+      </div>
+    </div>
+
+    <div class="home-section home-section--brends">
+      <div class="home-section__header">
+        <h2 class="home-title">Наші Бренди</h2>
+      </div>
+      <Carousel
+        :sliderItem="configStore.getConfig.brends"
+        :itemsToShow="2"
+        :pagination="false"
+      />
+    </div>
+
+    <div class="home-section home-section--lookbook">
+      <div class="home-section__header">
+        <h2 class="home-title">Наші Бренди</h2>
+      </div>
+      <div class="home-section__single-slider">
+        <Carousel
+          class=""
+          :sliderItem="configStore.getConfig.brends"
+          :itemsToShow="1"
+          :pagination="false"
+        />
       </div>
     </div>
   </div>
@@ -50,11 +88,27 @@
 <script lang="ts" setup>
 import { useConfigStore } from "@/stores/useConfigStore";
 import Carousel from "@/components/UIKit/Carousel";
-import ShortNews from "@/components/ShortNews";
-import ShortProduct from "@/components/ShortProduct";
+import HomeNews from "@/components/Home/HomeNews";
+import HomeProduct from "@/components/Home/HomeProduct";
+import HomeCategory from "@/components/Home/HomeCategory";
 
 const configStore = useConfigStore();
 const activeTab = ref(1);
+
+const getNewHomeProducts = computed(() => {
+  if (!configStore?.getConfig?.home_products?.new) [];
+  return configStore?.getConfig?.home_products?.new;
+});
+
+const getTopHomeProducts = computed(() => {
+  if (!configStore?.getConfig?.home_products?.top) [];
+  return configStore?.getConfig?.home_products?.top;
+});
+
+const getTopCategories = computed(() => {
+  if (!configStore?.getConfig?.top_categories) [];
+  return configStore?.getConfig?.top_categories;
+});
 
 onMounted(async () => {
   await configStore.fetchConfig();
@@ -82,6 +136,8 @@ onMounted(async () => {
 }
 
 .home-tabs {
+  margin-bottom: 80px;
+
   &__header {
     display: flex;
     justify-content: center;
@@ -110,6 +166,56 @@ onMounted(async () => {
     display: flex;
     justify-content: space-between;
     gap: 24px;
+  }
+}
+
+.home-title {
+  color: var(--extra-dark);
+  font-size: var(--font-lg);
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%;
+  margin-bottom: 4px;
+}
+
+.home-section {
+  margin-bottom: 80px;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  &__link {
+    color: var(--danger);
+    font-size: var(--font-xs);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: reapeat(2, 1fr);
+    gap: 36px;
+  }
+}
+
+.home-section__single-slider {
+  height: 560px;
+}
+</style>
+<style lang="scss">
+.home-section--brends {
+  .carousel__slide--active {
+    padding-right: 12px;
+  }
+
+  .carousel__slide--next {
+    padding-left: 12px;
   }
 }
 </style>

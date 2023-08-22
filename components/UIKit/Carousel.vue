@@ -1,11 +1,17 @@
 <template>
-  <Carousel :items-to-show="itemsToShow">
+  <Carousel :items-to-show="itemsToShow" :wrap-around="true" snapAlign="start">
     <Slide v-for="slide in sliderItem" :key="slide.title">
       <div class="slide">
         <img class="slide__image" :src="slide.image" :alt="slide.title" />
         <div class="slide__content">
           <h2 v-if="slide.title" class="slide__title">{{ slide.title }}</h2>
           <p v-if="slide.text" class="slide__text">{{ slide.text }}</p>
+          <nuxt-link
+            class="slide__link"
+            v-if="slide.link"
+            :to="`/${slide.link}`"
+            >Детальніше</nuxt-link
+          >
         </div>
       </div>
     </Slide>
@@ -51,6 +57,7 @@ const props = defineProps({
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 12px;
   }
 
   &__content {
@@ -69,6 +76,30 @@ const props = defineProps({
 
   &___text {
     font-size: 1.2rem;
+  }
+
+  &__link {
+    margin-top: 24px;
+    cursor: pointer;
+    display: inline-block;
+    padding: 8px 20px;
+    text-align: center;
+    font-size: var(--font-xs);
+    font-weight: 600;
+    line-height: 140%;
+    border-radius: 6px;
+
+    color: var(--button-text);
+    background: var(--extra-light);
+    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.04),
+      0px 2px 1px 0px rgba(0, 0, 0, 0.03), 0px 1px 3px 0px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+    border: 1px solid var(--border-light);
+
+    &:hover {
+      color: var(--extra-dark);
+      box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.05);
+    }
   }
 }
 

@@ -1,7 +1,9 @@
 <template>
   <div class="short-news">
     <h4 class="short-news__title">{{ item.title }}</h4>
-    <nuxt-link :to="item.link" class="short-news__link">Детальніше</nuxt-link>
+    <nuxt-link :to="`/${item.id}`" class="short-news__link"
+      >Детальніше</nuxt-link
+    >
   </div>
 </template>
 

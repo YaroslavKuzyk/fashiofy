@@ -11,12 +11,14 @@ export interface IConfigReponse {
 
 export interface IConfig {
   sales: ISales;
-  intro: IIntro[];
+  intro: ISlides[];
   short_news: IShortNews[];
   home_products: {
     new: IShortProduct[];
     top: IShortProduct[];
   };
+  top_categories: ITopProduct[];
+  brends: ISlides[];
 }
 
 export interface ISales {
@@ -24,15 +26,16 @@ export interface ISales {
   percent: number;
 }
 
-export interface IIntro {
+export interface ISlides {
   title?: string;
   text?: string;
   image: string;
+  link?: string;
 }
 
 export interface IShortNews {
   title: string;
-  link: string;
+  id: number;
 }
 
 export interface IShortProduct {
@@ -41,5 +44,11 @@ export interface IShortProduct {
   price: number;
   category: string;
   brend: string;
+  image: string;
+}
+
+export interface ITopProduct {
+  id: number;
+  title: string;
   image: string;
 }
