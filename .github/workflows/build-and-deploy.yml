@@ -1,30 +1,34 @@
-name: Build and Deploy Nuxt App
-
+name: Build and Deploy
 on:
   push:
     branches:
-      - main # Змініть на відповідну назву гілки
-
+      - main
+permissions:
+  contents: write
 jobs:
   build-and-deploy:
+    concurrency: ci-${{ github.ref }}
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        node-version: [16.17.1]
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
 
-      - name: Set Up Node.js
-        uses: actions/setup-node@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
-          node-version: 16.17.1 # Версія Node.js
+          node-version: ${{ matrix.node-version }}
 
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Build Nuxt App
-        run: npm run build # Використовуйте "build" зі свого package.json
-
-      - name: Deploy to Server
-        run: npm run preview
+      - name: Install & Generate 🔧
+        run: |
+          npm ci
+          npm run generate
         env:
           NUXT_APP_BASE_URL: ${{ vars.NUXT_APP_BASE_URL  }}
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
