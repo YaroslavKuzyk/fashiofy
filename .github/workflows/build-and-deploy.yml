@@ -1,34 +1,39 @@
-name: Build and Deploy
+name: Build and Deploy Nuxt App
+
 on:
   push:
     branches:
-      - main
-permissions:
-  contents: write
+      - main # Змініть на відповідну назву гілки
+
 jobs:
   build-and-deploy:
-    concurrency: ci-${{ github.ref }}
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18]
+
     steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: Set Up Node.js
+        uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 16.17.1 # Версія Node.js
 
-      - name: Install & Generate 🔧
-        run: |
-          npm ci
-          npm run generate
-        env:
-          NUXT_APP_BASE_URL: ${{ vars.NUXT_APP_BASE_URL  }}
+      - name: Install Dependencies
+        run: npm install
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Build Nuxt App
+        run: npm run build # Використовуйте "build" зі свого package.json
+
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@master
         with:
-          folder: dist
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SERVER_PORT }}
+          script: |
+            cd /path/to/your/app
+            git pull origin main  # Або інша гілка, яку ви деплоїте
+            npm install
+            npm run build  # Тут також використовуйте "build" зі свого package.json
+            # Інші команди для деплою
