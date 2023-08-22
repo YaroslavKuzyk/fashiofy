@@ -6,4 +6,7 @@ export default defineNuxtConfig({
     autoImports: ["defineStore", ["defineStore", "definePiniaStore"]],
   },
   buildDir: ".nuxt",
+  router: {
+    base: "/fashiofy/",
+  },
 });
