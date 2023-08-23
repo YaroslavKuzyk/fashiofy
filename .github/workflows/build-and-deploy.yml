@@ -2,7 +2,7 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - main
+      - gh-pages
 permissions:
   contents: write
 jobs:
@@ -31,4 +31,4 @@ jobs:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: .nuxt
+          folder: dist
